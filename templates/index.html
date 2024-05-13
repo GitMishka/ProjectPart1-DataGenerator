@@ -3,10 +3,26 @@
 <head>
     <title>Real-Time Data Stream</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.js"></script>
+    <style>
+        #header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+        #data {
+            margin-top: 50px;
+        }
+    </style>
     <script type="text/javascript">
         var socket = io.connect('http://' + document.domain + ':' + location.port + '/test');
         socket.on('newdata', function(msg) {
-            document.getElementById("data").innerHTML += '<p>' + msg.data + '</p>';
+            var node = document.createElement("P");
+            var textnode = document.createTextNode(msg.data);
+            node.appendChild(textnode);
+            document.getElementById("data").appendChild(node);
         });
         function clearData() {
             document.getElementById("data").innerHTML = "";
@@ -14,7 +30,9 @@
     </script>
 </head>
 <body>
+    <div id="header">
+        <button onclick="clearData()">Clear Data</button>
+    </div>
     <div id="data"></div>
-    <button onclick="clearData()">Clear Data</button>
 </body>
 </html>

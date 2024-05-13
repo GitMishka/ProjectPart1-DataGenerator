@@ -14,13 +14,14 @@ fake = Faker()
 def generate_transaction():
     while True:
         transaction = {
-            "user_id": fake.unique.random_int(min=1, max=1000),
-            "product_id": fake.unique.random_int(min=1, max=100),
+            "user_id": fake.unique.random_int(min=1, max=100000),
+            "product_id": fake.unique.random_int(min=1, max=100000),
             "amount": round(random.uniform(5.0, 500.0), 2),
             "timestamp": str(fake.date_time_this_year())
         }
         socketio.emit('newdata', {'data': json.dumps(transaction)}, namespace='/test')
-        time.sleep(random.uniform(0.5, 2.0))
+        time.sleep(random.uniform(0.1, 0.5))  
+
 
 @app.route('/')
 def index():
