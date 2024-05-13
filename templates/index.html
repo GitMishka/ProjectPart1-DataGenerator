@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Real-Time Data Stream</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.js"></script>
+    <script type="text/javascript">
+        var socket = io.connect('http://' + document.domain + ':' + location.port + '/test');
+        socket.on('newdata', function(msg) {
+            document.getElementById("data").innerHTML += '<p>' + msg.data + '</p>';
+        });
+        function clearData() {
+            document.getElementById("data").innerHTML = "";
+        }
+    </script>
+</head>
+<body>
+    <div id="data"></div>
+    <button onclick="clearData()">Clear Data</button>
+</body>
+</html>
