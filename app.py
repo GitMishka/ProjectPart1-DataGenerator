@@ -16,8 +16,8 @@ generator_thread = None
 def generate_transaction():
     while True:
         transaction = {
-            "user_id": fake.random_int(min=1, max=1000),
-            "product_id": fake.random_int(min=1, max=100),
+            "user_id": fake.random_int(min=1, max=10000),
+            "product_id": fake.random_int(min=1, max=1000),
             "amount": round(random.uniform(5.0, 500.0), 2),
             "timestamp": str(fake.date_time_this_year())
         }
